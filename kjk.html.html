@@ -1,27 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Uploadvideo</title>
-  <script>
-    let likes = 0;
-    function like() {
-      likes++;
-      document.getElementById('likes').textContent = likes + ' likes';
-    }
-  </script>
+	<title>Uploadvideo</title>
+	<script>
+		let likes = 0;
+		function like() {
+			likes++;
+			document.getElementById('likes').textContent = likes + ' likes';
+		}
+	</script>
 </head>
 <body>
-  <h1>Upload Video</h1>
-  <form method="post" enctype="multipart/form-data" action="kjk.html">
-    <label for="video">Choose a video to upload:</label>
-    <input type="file" name="video" id="video">
-    <br>
-    <input type="submit" value="Upload">
-  </form>
 
-  <h1>Like Button Example</h1>
-  <button onclick="like()">Like</button>
-  <p id="likes">0 likes</p>
-  
+	<h1>Upload Video</h1>
+	<form method="post" enctype="multipart/form-data" action="upload.php">
+		<label for="video">Choose a video to upload:</label>
+		<input type="file" name="video" id="video">
+		<br>
+		<input type="submit" value="Upload">
+	</form>
+
+	<h1>Like Button Example</h1>
+	<button onclick="like()">Like</button>
+	<p id="likes">0 likes</p>
+	
 </body>
 </html>
+
+<?php
+if ($_FILES['video']['error'] == 0) {
+    $temp = $_FILES['video']['tmp_name'];
+    $name = $_FILES['video']['name'];
+    move_uploaded_file($temp, "uploads/$name");
+    echo "File uploaded successfully.";
+} else {
+    echo "Error uploading file.";
+}
+?>
+
