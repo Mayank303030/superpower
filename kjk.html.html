@@ -13,7 +13,7 @@
 <body>
 
 	<h1>Upload Video</h1>
-	<form method="post" enctype="multipart/form-data" action="upload.php">
+	<form method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 		<label for="video">Choose a video to upload:</label>
 		<input type="file" name="video" id="video">
 		<br>
@@ -25,18 +25,18 @@
 	<p id="likes">0 likes</p>
 	
 	<?php
-if ($_FILES['video']['error'] == 0) {
-    $temp = $_FILES['video']['tmp_name'];
-    $name = $_FILES['video']['name'];
-    move_uploaded_file($temp, "uploads/$name");
-    echo "File uploaded successfully.";
-} else {
-    echo "Error uploading file.";
-}
-?>
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		if ($_FILES['video']['error'] == 0) {
+			$temp = $_FILES['video']['tmp_name'];
+			$name = $_FILES['video']['name'];
+			move_uploaded_file($temp, "uploads/$name");
+			echo "File uploaded successfully.";
+		} else {
+			echo "Error uploading file.";
+		}
+	}
+	?>
 
 	
 </body>
 </html>
-
-
