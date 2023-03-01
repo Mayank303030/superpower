@@ -24,10 +24,7 @@
 	<button onclick="like()">Like</button>
 	<p id="likes">0 likes</p>
 	
-</body>
-</html>
-
-<?php
+	<?php
 if ($_FILES['video']['error'] == 0) {
     $temp = $_FILES['video']['tmp_name'];
     $name = $_FILES['video']['name'];
@@ -37,4 +34,9 @@ if ($_FILES['video']['error'] == 0) {
     echo "Error uploading file.";
 }
 ?>
+
+	
+</body>
+</html>
+
 
